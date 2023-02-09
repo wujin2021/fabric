@@ -1,0 +1,124 @@
+19:00:13.037 INFO [c.e.f.FabricFabcarApplication]  Starting FabricFabcarApplication using Java 1.8.0_202 on DESKTOP-PSUHT22 with PID 20024 (E:\IDEACode\fabric1\target\classes started by yu in E:\IDEACode\fabric1)
+19:00:13.039 DEBUG [c.e.f.FabricFabcarApplication]  Running with Spring Boot v2.7.8, Spring v5.3.25
+19:00:13.039 INFO [c.e.f.FabricFabcarApplication]  No active profile set, falling back to 1 default profile: "default"
+19:00:13.864 INFO [o.a.c.h.Http11NioProtocol]  Initializing ProtocolHandler ["http-nio-8080"]
+19:00:13.864 INFO [o.a.c.c.StandardService]  Starting service [Tomcat]
+19:00:13.864 INFO [o.a.c.c.StandardEngine]  Starting Servlet engine: [Apache Tomcat/9.0.71]
+19:00:14.001 INFO [o.a.c.c.C.[.[.[/]]  Initializing Spring embedded WebApplicationContext
+19:00:14.219 DEBUG [o.h.f.s.h.Config]  Loading configuration from E:\IDEACode\fabric1\config.properties and it is present: false
+19:00:14.219 WARN [o.h.f.s.h.Config]  Failed to load any configuration from: config.properties. Using toolkit defaults
+19:00:14.265 DEBUG [i.g.n.s.i.n.u.i.l.InternalLoggerFactory]  Using SLF4J as the default logging framework
+19:00:14.267 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  -Dio.netty.noUnsafe: false
+19:00:14.267 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  Java version: 8
+19:00:14.267 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  sun.misc.Unsafe.theUnsafe: available
+19:00:14.268 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  sun.misc.Unsafe.copyMemory: available
+19:00:14.268 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  sun.misc.Unsafe.storeFence: available
+19:00:14.268 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  java.nio.Buffer.address: available
+19:00:14.268 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  direct buffer constructor: available
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  java.nio.Bits.unaligned: available, true
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  java.nio.DirectByteBuffer.<init>(long, int): available
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  sun.misc.Unsafe: available
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.tmpdir: C:\Users\yu\AppData\Local\Temp (java.io.tmpdir)
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.bitMode: 64 (sun.arch.data.model)
+19:00:14.269 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  Platform: Windows
+19:00:14.270 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.maxDirectMemory: 3790077952 bytes
+19:00:14.270 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.uninitializedArrayAllocationThreshold: -1
+19:00:14.270 DEBUG [i.g.n.s.i.n.u.i.CleanerJava6]  java.nio.ByteBuffer.cleaner(): available
+19:00:14.270 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.noPreferDirect: false
+19:00:14.278 INFO [o.a.c.c.StandardService]  Stopping service [Tomcat]
+19:00:14.324 ERROR [o.s.b.d.LoggingFailureAnalysisReporter]  
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    io.grpc.Metadata$Key.validateName(Metadata.java:754)
+
+The following method did not exist:
+
+    com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;CLjava/lang/Object;)V
+
+The calling method's class, io.grpc.Metadata$Key, was loaded from the following location:
+
+    jar:file:/E:/Maven/MavenRepo2/io/grpc/grpc-api/1.51.0/grpc-api-1.51.0.jar!/io/grpc/Metadata$Key.class
+
+The called method's class, com.google.common.base.Preconditions, is available from the following locations:
+
+    jar:file:/E:/Maven/MavenRepo2/com/google/guava/guava/16.0.1/guava-16.0.1.jar!/com/google/common/base/Preconditions.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    com.google.common.base.Preconditions: file:/E:/Maven/MavenRepo2/com/google/guava/guava/16.0.1/guava-16.0.1.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes io.grpc.Metadata$Key and com.google.common.base.Preconditions
+
+19:53:59.844 INFO [c.e.f.FabricFabcarApplication]  Starting FabricFabcarApplication using Java 1.8.0_202 on DESKTOP-PSUHT22 with PID 11848 (E:\IDEACode\fabric1\target\classes started by yu in E:\IDEACode\fabric1)
+19:53:59.847 DEBUG [c.e.f.FabricFabcarApplication]  Running with Spring Boot v2.7.8, Spring v5.3.25
+19:53:59.847 INFO [c.e.f.FabricFabcarApplication]  No active profile set, falling back to 1 default profile: "default"
+19:54:00.859 INFO [o.a.c.h.Http11NioProtocol]  Initializing ProtocolHandler ["http-nio-8080"]
+19:54:00.860 INFO [o.a.c.c.StandardService]  Starting service [Tomcat]
+19:54:00.860 INFO [o.a.c.c.StandardEngine]  Starting Servlet engine: [Apache Tomcat/9.0.71]
+19:54:00.997 INFO [o.a.c.c.C.[.[.[/]]  Initializing Spring embedded WebApplicationContext
+19:54:01.218 DEBUG [o.h.f.s.h.Config]  Loading configuration from E:\IDEACode\fabric1\config.properties and it is present: false
+19:54:01.218 WARN [o.h.f.s.h.Config]  Failed to load any configuration from: config.properties. Using toolkit defaults
+19:54:01.260 DEBUG [i.g.n.s.i.n.u.i.l.InternalLoggerFactory]  Using SLF4J as the default logging framework
+19:54:01.262 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  -Dio.netty.noUnsafe: false
+19:54:01.262 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  Java version: 8
+19:54:01.263 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  sun.misc.Unsafe.theUnsafe: available
+19:54:01.263 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  sun.misc.Unsafe.copyMemory: available
+19:54:01.263 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  sun.misc.Unsafe.storeFence: available
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  java.nio.Buffer.address: available
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  direct buffer constructor: available
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  java.nio.Bits.unaligned: available, true
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  jdk.internal.misc.Unsafe.allocateUninitializedArray(int): unavailable prior to Java9
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent0]  java.nio.DirectByteBuffer.<init>(long, int): available
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  sun.misc.Unsafe: available
+19:54:01.264 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.tmpdir: C:\Users\yu\AppData\Local\Temp (java.io.tmpdir)
+19:54:01.265 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.bitMode: 64 (sun.arch.data.model)
+19:54:01.265 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  Platform: Windows
+19:54:01.266 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.maxDirectMemory: 3790077952 bytes
+19:54:01.266 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.uninitializedArrayAllocationThreshold: -1
+19:54:01.266 DEBUG [i.g.n.s.i.n.u.i.CleanerJava6]  java.nio.ByteBuffer.cleaner(): available
+19:54:01.266 DEBUG [i.g.n.s.i.n.u.i.PlatformDependent]  -Dio.netty.noPreferDirect: false
+19:54:01.274 INFO [o.a.c.c.StandardService]  Stopping service [Tomcat]
+19:54:01.324 ERROR [o.s.b.d.LoggingFailureAnalysisReporter]  
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+An attempt was made to call a method that does not exist. The attempt was made from the following location:
+
+    io.grpc.Metadata$Key.validateName(Metadata.java:754)
+
+The following method did not exist:
+
+    com.google.common.base.Preconditions.checkArgument(ZLjava/lang/String;CLjava/lang/Object;)V
+
+The calling method's class, io.grpc.Metadata$Key, was loaded from the following location:
+
+    jar:file:/E:/Maven/MavenRepo2/io/grpc/grpc-api/1.51.0/grpc-api-1.51.0.jar!/io/grpc/Metadata$Key.class
+
+The called method's class, com.google.common.base.Preconditions, is available from the following locations:
+
+    jar:file:/E:/Maven/MavenRepo2/com/google/guava/guava/16.0.1/guava-16.0.1.jar!/com/google/common/base/Preconditions.class
+
+The called method's class hierarchy was loaded from the following locations:
+
+    com.google.common.base.Preconditions: file:/E:/Maven/MavenRepo2/com/google/guava/guava/16.0.1/guava-16.0.1.jar
+
+
+Action:
+
+Correct the classpath of your application so that it contains compatible versions of the classes io.grpc.Metadata$Key and com.google.common.base.Preconditions
+

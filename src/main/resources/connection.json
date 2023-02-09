@@ -1,0 +1,103 @@
+{
+  "name": "basic-network",
+  "version": "1.0.0",
+  "dependencies": {
+  },
+  "client": {
+    "organization": "Org1",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        },
+        "orderer": "300"
+      }
+    }
+  },
+  "channels": {
+    "mychannel": {
+      "orderers": [
+        "orderer.example.com"
+      ],
+      "peers": {
+        "peer0.org1.example.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+
+      }
+    }
+  },
+  "organizations": {
+    "Org1": {
+      "mspid": "Org1MSP",
+      "peers": [
+        "peer0.org1.example.com"
+      ],
+      "certificateAuthorities": [
+        "ca-org1"
+      ],
+      "adminPrivateKeyPEM": {
+        "path": "src/main/resources/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/cd96d5260ad4757551ed4a5a991e62130f8008a0bf996e4e4b84cd097a747fec_sk"
+      },
+      "signedCertPEM": {
+        "path": "src/main/resources/crypto-config/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/Admin@org1.example.com-cert.pem"
+      }
+    }
+
+
+  },
+  "orderers": {
+    "orderer.example.com": {
+      "url": "grpc://192.168.198.102:7050",
+      "mspid": "OrdererMSP",
+      "grpcOptions": {
+        "ssl-target-name-override": "orderer.example.com",
+        "hostnameOverride": "orderer.example.com"
+      },
+      "tlsCACerts": {
+        "path": "src/main/resources/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+      },
+      "adminPrivateKeyPEM": {
+        "path": "src/main/resources/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/msp/keystore/1deeab5433fa6e5f045eb763109d6165268fba153211af1281f00d45f54b1022_sk"
+      },
+      "signedCertPEM": {
+        "path": "src/main/resources/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/msp/signcerts/Admin@example.com-cert.pem"
+      }
+    }
+  },
+  "peers": {
+    "peer0.org1.example.com": {
+      "url": "grpc://192.168.198.102:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org1.example.com",
+        "hostnameOverride": "peer0.org1.example.com",
+        "request-timeout": 120001
+      },
+      "tlsCACerts": {
+        "path": "src/main/resources/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
+      }
+    }
+
+  },
+  "certificateAuthorities": {
+    "ca-org1": {
+      "url": "https://192.168.198.102:7054",
+      "grpcOptions": {
+        "verify": true
+      },
+      "tlsCACerts": {
+        "path": "src/main/resources/crypto-config/peerOrganizations/org1.example.com/ca/ca.org1.example.com-cert.pem"
+      },
+      "registrar": [
+        {
+          "enrollId": "admin",
+          "enrollSecret": "adminpw"
+        }
+      ]
+    }
+
+  }
+}
