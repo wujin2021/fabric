@@ -1,0 +1,217 @@
+  .carousel-inner img {
+             width: 100%;
+             height: auto;
+			 transition: all 0.2s ease-in;          /*定义过渡动画*/
+             opacity: 1;                         /*   透明度  */
+		 }
+		.container0{
+			width: 100%;
+			height: auto;
+		}
+		.container1{
+			width: 100%;
+			height: auto;
+		}
+
+#navbar{
+    height: 60px;                    /*定义高度*/
+    box-shadow: 0 1px 10px wheat;      /*定义阴影效果*/
+}
+.list{
+    height: 50px;                    /*定义高度*/
+}
+.nav-list li{
+    margin-left: 10px;               /*定义左边外边距*/
+}
+.nav-list li:hover{
+    border-bottom: 2px solid powderblue;   /*定义底边边框*/
+}
+
+ 
+p{
+    text-indent: 2em;                    /*首行缩进2字符*/
+	text-align: left;
+	
+}
+li .active{
+    border-bottom: 2px solid red;         /*定义底边边框*/
+}
+.custom li a{
+	color: #000000 ;
+}
+.custom  .active{
+    background-color:rgba(0, 0, 0, 0.03) !important;
+	color: red !important;
+	border-bottom: none !important;
+}
+ .card{
+            transition:text-shadow 3s linear;     /*设置过渡动画*/
+        }
+        .card:hover{
+            box-shadow: 3px 3px 20px 0 #a4b9b4,-3px -3px 20px 0 #a4b9b4;   /*设置阴影*/
+        }
+.bg{
+	background-color:rgba(0, 0, 0, 0) ;
+	background-size: cover;
+	
+	
+}
+
+.divscale{
+	   transition:text-shadow 3s linear;
+	   /* box-shadow: 3px 3px 20px 0 #a4b9b4,-3px -3px 20px 0 #a4b9b4; */
+	  }
+	  
+	  .oDiv1{
+	   position: absolute;
+	   height: 100px;
+	   width: auto;
+	   left: 20%;
+	   top: 50%;
+	   color: black;
+	   animation-name: oDiv;
+	   
+	 /* animation-delay: 0.5s;延迟时间
+	   animation-iteration-count: 2;循环次数 */
+	   animation-duration: 3s;
+	  /* animation-direction: reverse;反向播放动画 */
+	   }
+	   @-webkit-keyframes oDiv{
+	   0%{left: -180px;top: 200px;opacity: 0;}
+	   100%{left: 200px;top: 50px;opacity: 1;}
+	   }
+	   @keyframes oDiv{
+	   0%{left: -180px;top: 200px;opacity: 0;}
+	   2100%{left: 200px;top: 50px;opacity: 1;}
+	   }
+	   
+	   /* CSS魔方 */
+	   
+ /*最外层容器样式*/
+ 		.wrap {
+ 			width: 200px;
+ 			height: 200px;
+ 			margin: 200px;
+ 			position: relative;
+ 		}
+ 
+ 		/*包裹所有容器样式*/
+ 		.cube {
+ 			width: 200px;
+ 			height: 200px;
+ 			margin: 0 auto;
+ 			transform-style: preserve-3d;
+ 			transform: rotateX(-30deg) rotateY(-80deg);
+ 			animation: rotate linear 20s infinite;
+ 		}
+ 
+ 		@-webkit-keyframes rotate {
+ 			from {
+ 				transform: rotateX(0deg) rotateY(0deg);
+ 			}
+ 			to {
+ 				transform: rotateX(360deg) rotateY(360deg);
+ 			}
+ 		}
+ 
+ 		.cube div {
+ 			position: absolute;
+ 			width: 200px;
+ 			height: 200px;
+ 			opacity: 0.8;
+ 			transition: all .4s;
+ 		}
+ 
+ 		/*定义所有图片样式*/
+ 		.pic {
+ 			width: 200px;
+ 			height: 200px;
+ 		}
+ 
+ 		.cube .out_front {
+ 			transform: rotateY(0deg) translateZ(100px);
+ 		}
+ 
+ 		.cube .out_back {
+ 			transform: translateZ(-100px) rotateY(180deg);
+ 		}
+ 
+ 		.cube .out_left {
+ 			transform: rotateY(-90deg) translateZ(100px);
+ 		}
+ 
+ 		.cube .out_right {
+ 			transform: rotateY(90deg) translateZ(100px);
+ 		}
+ 
+ 		.cube .out_top {
+ 			transform: rotateX(90deg) translateZ(100px);
+ 		}
+ 
+ 		.cube .out_bottom {
+ 			transform: rotateX(-90deg) translateZ(100px);
+ 		}
+ 
+ 		/*定义小正方体样式*/
+ 		.cube span {
+ 			display: block;
+ 			width: 100px;
+ 			height: 100px;
+ 			position: absolute;
+ 			top: 50px;
+ 			left: 50px;
+ 		}
+ 
+ 		.cube .in_pic {
+ 			width: 100px;
+ 			height: 100px;
+ 		}
+ 
+ 		.cube .in_front {
+ 			transform: rotateY(0deg) translateZ(50px);
+ 		}
+ 
+ 		.cube .in_back {
+ 			transform: translateZ(-50px) rotateY(180deg);
+ 		}
+ 
+ 		.cube .in_left {
+ 			transform: rotateY(-90deg) translateZ(50px);
+ 		}
+ 
+ 		.cube .in_right {
+ 			transform: rotateY(90deg) translateZ(50px);
+ 		}
+ 
+ 		.cube .in_top {
+ 			transform: rotateX(90deg) translateZ(50px);
+ 		}
+ 
+ 		.cube .in_bottom {
+ 			transform: rotateX(-90deg) translateZ(50px);
+ 		}
+ 
+ 		/*鼠标移入后样式*/
+ 		.cube:hover .out_front {
+ 			transform: rotateY(0deg) translateZ(200px);
+ 		}
+ 
+ 		.cube:hover .out_back {
+ 			transform: translateZ(-200px) rotateY(180deg);
+ 		}
+ 
+ 		.cube:hover .out_left {
+ 			transform: rotateY(-90deg) translateZ(200px);
+ 		}
+ 
+ 		.cube:hover .out_right {
+ 			transform: rotateY(90deg) translateZ(200px);
+ 		}
+ 
+ 		.cube:hover .out_top {
+ 			transform: rotateX(90deg) translateZ(200px);
+ 		}
+ 
+ 		.cube:hover .out_bottom {
+ 			transform: rotateX(-90deg) translateZ(200px);
+ 		}
