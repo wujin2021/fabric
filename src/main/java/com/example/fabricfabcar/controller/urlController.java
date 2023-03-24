@@ -25,8 +25,8 @@ public class urlController {
         return "transfer";
     }
 
-    @GetMapping("block")
-    public String getBlock(){
-        return "block";
-    }
+//    @GetMapping("block")
+//    public String getBlock(){
+//        return "block";
+//    }
 }

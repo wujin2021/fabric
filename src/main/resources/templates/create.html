@@ -3,90 +3,128 @@
 
 <head>
   <meta charset="utf-8">
-  <title>fabric invoke</title>
-  <script src="/js/jquery-3.5.1.min.js"></script>
-
-  <style type="text/css">
-    input[type=text],
-    select {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-    }
-
-    input[type=submit] {
-      width: 25%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    input[type=reset] {
-      width: 100%;
-      background-color: #4CAF50;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    input[type=submit]:hover {
-      background-color: #45a049;
-    }
-
-    div {
-      position: fixed;
-      top: 90px;
-      right: 280px;
-      width: 50%;
-      border-radius: 5px;
-      background-color: #f2f2f2;
-      padding: 20px;
-    }
-  </style>
+  <title>fabric</title>
+  <!-- Bootstrap core CSS -->
+  <!--    thymeleaf加载静态资源-->
+  <!--    错误原因：路径起始位置默认必须以反斜杠 ”/“ 开头，代表static目录下的静态资源文件-->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+  <link rel="stylesheet" th:href="@{/font-awesome-4.7.0/css/font-awesome.css}" />
+  <link rel="stylesheet" th:href="@{/css/style.css}" />
+  <script type="text/javascript" th:src="@{/js/jquery-3.5.1.min.js}"></script>
+  <script type="text/javascript" th:src="@{/js/popper.js}"></script>
+  <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 </head>
 
 <body>
-<div>
-  <h2>添加数据到 fabric:</h2>
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <a class="navbar-brand " style="margin-left: 5%;" href="#"></a>
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item" style="margin-left: 5%;">
+        <a class="nav-link" href="/index" style="font-size: larger;">index</a>
+      </li>
+      <li class="nav-item dropdown active" style="margin-left: 5%;">
+        <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false" href="#" style="font-size: larger;">data</a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/create" >create</a></li>
+          <li><a class="dropdown-item" href="/query" >query</a></li>
+          <!-- <li><hr class="dropdown-divider"></li> -->
+          <li><a class="dropdown-item" href="/transfer" >transfer</a></li>
+        </ul>
+      </li>
+
+      <li class="nav-item" style="margin-left: 5%;">
+        <a class="nav-link" href="/car/blocks" style="font-size: larger;">block</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+<!--<div>-->
+<!--  <h2>添加数据到 fabric:</h2>-->
+
+<!--  <form action="/car/add" method="post">-->
+
+<!--    <label>id</label>-->
+<!--    <input type="text" name="carnumber" >-->
+
+<!--    <label>make</label>-->
+<!--    <input type="text" name="make" id="make">-->
+
+
+<!--    <label>model</label>-->
+<!--    <input type="text" name="model" id="model">-->
+
+<!--    <label>colour</label>-->
+<!--    <input type="text" name="colour" id="colour">-->
+
+<!--    <label>owner</label>-->
+<!--    <input type="text" name="owner" id="owner">-->
+<!--    &lt;!&ndash; <div class="add-save"> &ndash;&gt;-->
+<!--    <input type="submit" value="发送" >-->
+<!--    &lt;!&ndash; </div> &ndash;&gt;-->
+
+<!--  </form>-->
+
+<!--  <p th:text="${payload}">...</p>-->
+<!--  <p th:text="${status}">...</p>-->
+
+<!--</div>-->
+
+<div style="margin-top: 5%;margin-left: 20%;margin-right: 20%;" >
+  <h2>Create data to fabric </h2>
   <form action="/car/add" method="post">
-
-    <label>id</label>
-    <input type="text" name="carnumber" >
-
-    <label>make</label>
-    <input type="text" name="make" id="make">
-
-
-    <label>model</label>
-    <input type="text" name="model" id="model">
-
-    <label>colour</label>
-    <input type="text" name="colour" id="colour">
-
-    <label>owner</label>
-    <input type="text" name="owner" id="owner">
-    <!-- <div class="add-save"> -->
-    <input type="submit" value="发送" >
-    <!-- </div> -->
-
+    <div class="form-group row">
+      <label for="carnumber" class="col-sm-2 col-form-label">id</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="carnumber" id="carnumber">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="make" class="col-sm-2 col-form-label">make</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="make" id="make">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="model" class="col-sm-2 col-form-label">model</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="model" id="model">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="colour" class="col-sm-2 col-form-label">colour</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="colour" id="colour">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="owner" class="col-sm-2 col-form-label">owner</label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" name="owner" id="owner">
+      </div>
+    </div>
+    <div class="form-group row" style="margin-left: 10%;">
+      <div class="col-sm-6" >
+        <button type="submit" style="width: 70px;" class="btn btn-primary">submit</button>
+      </div  >
+      <div class="col-sm-6">
+        <button style="width: 70px;" type="reset" class="btn btn-danger">reset</button>
+      </div>
+    </div>
   </form>
-
   <p th:text="${payload}">...</p>
   <p th:text="${status}">...</p>
-
 </div>
+
 
 </body>
 

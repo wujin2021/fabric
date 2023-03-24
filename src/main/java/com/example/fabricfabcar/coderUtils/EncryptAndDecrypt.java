@@ -1,4 +1,4 @@
-package com.example.fabricfabcar.ECCUtils;
+package com.example.fabricfabcar.coderUtils;
 
 import org.ethereum.crypto.ECIESCoder;
 import org.spongycastle.math.ec.ECPoint;
@@ -8,8 +8,9 @@ import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public class EncryptAndDecrypt {
 
+public class EncryptAndDecrypt {
+    static final BigInteger P = new BigInteger("21888242871839275222246405745257275088696311157297823662689037894645226208583",16);
     //对数据进行非对称加密
     public static String encrypt(String source, String publicKey) {
         try {
@@ -17,17 +18,17 @@ public class EncryptAndDecrypt {
             byte[] preEncryBytes = source.getBytes(StandardCharsets.UTF_8);
             //将 publicKey 转为 ECKey 类型的 pub
             ECKey pub = ECKey.fromPublicOnly(Hex.decode(publicKey));
-            System.out.println("加密前字符串： " + new String(preEncryBytes));
+            //  System.out.println("加密前字符串： " + new String(preEncryBytes));
 
             //加密后 bytes cipherText
             byte[] cipherText = ECIESCoder.encryptSimple(pub.getPubKeyPoint(), preEncryBytes);
-            System.out.println("加密之后字符串： " + Hex.toHexString(cipherText));
+            //  System.out.println("加密之后字符串： " + Hex.toHexString(cipherText));
 
 
             //将 加密后cipherText 进行 base64 编码
             byte[] encoded = Base64.getEncoder().encode(cipherText);
             //编码后转String
-            System.out.println(" 加密之后 encrypt base64 后转string: " + new String(encoded));
+           //  System.out.println(" 加密之后 encrypt base64 后转string: " + new String(encoded));
             String encryptStr = new String(encoded);
             return encryptStr;
 
@@ -42,13 +43,13 @@ public class EncryptAndDecrypt {
         try {
             // 加密数据先转为 bytes， 再base64 decode
             byte[] preDecryptBytes = Base64.getDecoder().decode(source.getBytes(StandardCharsets.UTF_8));
-            System.out.println("解密前字符串： " +  Hex.toHexString(preDecryptBytes));
+           // System.out.println("解密前字符串： " +  Hex.toHexString(preDecryptBytes));
             //私钥转换为ECkey 类型
             ECKey priv = ECKey.fromPrivate(Hex.decode(privateKey));
             //解密
             byte[] decryptResult = ECIESCoder.decryptSimple(priv.getPrivKey(), preDecryptBytes);
             String deStr = new String(decryptResult);
-            System.out.println("解密后字符串 " + deStr);
+           // System.out.println("解密后字符串 " + deStr);
             return deStr;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -59,14 +60,14 @@ public class EncryptAndDecrypt {
     public static String getPubkeyHexString(String privkeystr){
         BigInteger privkey = new BigInteger(privkeystr,16);
         ECKey ecKey = ECKey.fromPrivate(privkey);
-        System.out.println("公钥为："+Hex.toHexString(ecKey.getPubKey()));
+        //System.out.println("公钥为："+Hex.toHexString(ecKey.getPubKey()));
         return Hex.toHexString(ecKey.getPubKey());
     }
 
     public static String getPrivkeyHexString(String privkeystr){
         BigInteger privkey = new BigInteger(privkeystr,16);
         ECKey ecKey = ECKey.fromPrivate(privkey);
-        System.out.println("私钥为："+Hex.toHexString(ecKey.getPrivKeyBytes()));
+        //System.out.println("私钥为："+Hex.toHexString(ecKey.getPrivKeyBytes()));
         return Hex.toHexString(ecKey.getPrivKeyBytes());
     }
 
@@ -79,16 +80,23 @@ public class EncryptAndDecrypt {
         BigInteger num2 = new BigInteger(Hex.toHexString(t2),16);
         System.out.println("num1:"+num1);
         System.out.println("num2:"+num2);
-        System.out.println("num1+num2:"+num1.add(num2));
-        String result = Base64.getEncoder().encodeToString(num1.add(num2).toString().getBytes(StandardCharsets.UTF_8));
+        System.out.println("num1+num2:"+num1.add(num2).mod(P));
+        String result = Base64.getEncoder().encodeToString(num1.add(num2).mod(P).toString().getBytes(StandardCharsets.UTF_8));
         return result;
     }
 
-    public static String encode(String text){
+    public static String encrypt(String text){
         String prikeystr = "111111111111111111111111111111111";
         String privkey = getPrivkeyHexString(prikeystr);
         String pubkey = getPubkeyHexString(prikeystr);
         String result= encrypt(text,pubkey);
+        return result;
+    }
+
+    public static String decrypt(String text){
+        String prikeystr = "111111111111111111111111111111111";
+        String privkey = getPrivkeyHexString(prikeystr);
+        String result= decrypt(text,privkey);
         return result;
     }
 
@@ -102,13 +110,13 @@ public class EncryptAndDecrypt {
         String privkey = getPrivkeyHexString(prikeystr);
         String pubkey = getPubkeyHexString(prikeystr);
         EncryptAndDecrypt encryptAndDecrypt = new EncryptAndDecrypt();
-    //    String t1 = encryptAndDecrypt.encrypt(text1, pubkey);
-    //    String t2 = encryptAndDecrypt.encrypt(text2, pubkey);
-       // String result = add(t1,t2);
-       // System.out.println(result);
+//        String t1 = encryptAndDecrypt.encrypt(text1, pubkey);
+//        String t2 = encryptAndDecrypt.encrypt(text2, pubkey);
+//        String result = add(t1,t2);
+//        System.out.println(result);
         String plaintext3 = encryptAndDecrypt.encrypt("yuxiujieasdgdgdf,sgd 我 你 @", pubkey);
         encryptAndDecrypt.decrypt(plaintext3,privkey);
-       // String plain3 = encryptAndDecrypt.decrypt(result,privkey);
+//        String plain3 = encryptAndDecrypt.decrypt(result,privkey);
 
 
 

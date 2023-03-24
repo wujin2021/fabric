@@ -2,71 +2,70 @@
 <html>
 
 <head>
-    <title>Notifications - Ready Bootstrap Dashboard</title>
-    <style type="text/css">
-        ul.demo {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
+    <meta charset="utf-8">
+    <title>fabric</title>
+    <!-- Bootstrap core CSS -->
+    <!--    错误原因：路径起始位置默认必须以反斜杠 ”/“ 开头，代表static目录下的静态资源文件-->
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" th:href="@{/font-awesome-4.7.0/css/font-awesome.css}" />
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <script type="text/javascript" th:src="@{/js/jquery-3.5.1.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/popper.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 
-        .div1 {
-            position: fixed;
-            top: 90px;
-            right: 280px;
-            left: 280px;
-            bottom:200px;
-            width: 50%;
-            border-radius: 5px;
-            background-color: #f2f2f2;
-            padding: 20px;
-        }
-
-        .button {
-            background-color: #4CAF50;
-            /* Green */
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-
-        .button2 {
-            background-color: #008CBA;
-        }
-
-        /* Blue */
-        .button3 {
-            background-color: #f44336;
-        }
-
-        /* Red */
-    </style>
 </head>
 
 <body>
-<div class="div1">
-    <ul class="demo">
-        <div style="margin-left:130px;margin-top:120px">
-            <a href="/query">
-                <button class="button">query car</button>
-            </a>
-            <a href="/create">
-                <button class="button button2">create car</button>
-            </a>
-            <a href="/transfer">
-                <button class="button button2">transfer car</button>
-            </a>
-            <a href="/block">
-                <button class="button button3">block query</button>
-            </a>
-        </div>
-    </ul>
+<nav class="navbar navbar-expand-lg navbar-light bg-light ">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand " style="margin-left: 5%;" href="#"></a>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active" style="margin-left: 5%;">
+                <a class="nav-link" href="/index" style="font-size: larger;">index</a>
+            </li>
+            <li class="nav-item dropdown" style="margin-left: 5%;">
+                <a class="nav-link dropdown-toggle" role="button" data-toggle="dropdown" aria-expanded="false" href="#" style="font-size: larger;">data</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="/create" >create</a></li>
+                    <li><a class="dropdown-item" href="/query" >query</a></li>
+                    <!-- <li><hr class="dropdown-divider"></li> -->
+                    <li><a class="dropdown-item" href="/transfer" >transfer</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-item" style="margin-left: 5%;">
+                <a class="nav-link" href="/car/blocks" style="font-size: larger;">block</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>
+
+
+<div style="margin-top: 5%;margin-left: 20%;margin-right: 20%;">
+
+    <button class="btn btn-outline-success " onclick="javascript:window.location.href='/query'">
+        query
+    </button>
+
+
+    <button class="btn btn-outline-success" style="margin-left: 10%;" onclick="location='/create'">
+        create
+    </button>
+
+
+    <button class="btn btn-outline-success" style="margin-left: 10%;" onclick="location='/transfer'">
+        transfer
+    </button>
+
+    <button class="btn btn-outline-success" style="margin-left: 10%;" onclick="location='/car/blocks'">block</button>
+
 </div>
 
 

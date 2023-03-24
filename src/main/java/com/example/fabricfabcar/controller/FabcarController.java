@@ -1,14 +1,22 @@
 package com.example.fabricfabcar.controller;
 
-import com.example.fabricfabcar.FabcarService;
+import com.alibaba.fastjson.JSON;
+import com.example.fabricfabcar.domain.SimpleBlockInfo;
+import com.example.fabricfabcar.service.FabcarService;
+import com.example.fabricfabcar.utils.HashAndStringUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hyperledger.fabric.gateway.*;
+import org.hyperledger.fabric.protos.common.Common;
+import org.hyperledger.fabric.sdk.BlockInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.Map;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.spi.CurrencyNameProvider;
 
 
 @Controller
@@ -31,7 +39,7 @@ public class FabcarController {
         System.out.println("result="+result);
         model.addAllAttributes(result);
 
-        return "aloneCar";
+        return "aloneCar.html";
     }
 
     /*查询所有的car*/
@@ -43,7 +51,7 @@ public class FabcarController {
         System.out.println("result="+result);
         model.addAllAttributes(result);
 
-        return "allCar";
+        return "allCar.html";
     }
 
     /*新增一个car的资产*/
@@ -57,7 +65,7 @@ public class FabcarController {
         System.out.println("result="+result);
         model1.addAllAttributes(result);
 
-        return "create";
+        return "create.html";
     }
 
     /*将一个car资产转移到另一个owner上*/
@@ -68,8 +76,49 @@ public class FabcarController {
         System.out.println("result="+result);
         model.addAllAttributes(result);
 
-        return "transfer";
+        return "transfer.html";
     }
 
+    @GetMapping("/blocks")
 
+    public String block(Model model)  {
+       long height = fabcarService.getBlcokchainInfo().getHeight();
+       System.out.println("height="+height);
+       List<SimpleBlockInfo> list = fabcarService.getBlcokchainInfosByEndNumber(height-1);
+       for (SimpleBlockInfo blockInfo : list) {
+           System.out.println(blockInfo.toString());
+       }
+       Map<String, Object> result = new ConcurrentHashMap<>();
+       result.put("blocks",list);
+       result.put("height",height);
+
+       model.addAllAttributes(result);
+       return "block.html";
+    }
+
+    @GetMapping("/queryBlockByHash")
+    @ResponseBody
+    public String queryBlockByHash(@RequestParam("hash")String hash,Model model)  {
+       BlockInfo blockInfo = fabcarService.getBlcokchainInfoByHash(HashAndStringUtil.stringToHash(hash));
+       SimpleBlockInfo simpleBlockInfo = new SimpleBlockInfo(blockInfo.getBlockNumber(),blockInfo.getPreviousHash(),blockInfo.getDataHash());
+       model.addAttribute(simpleBlockInfo);
+       return simpleBlockInfo.toString();
+    }
+
+    @GetMapping("/queryBlockByNumber")
+    @ResponseBody
+    public String queryBlockByNumber(@RequestParam("num")String num,Model model)  {
+        BlockInfo blockInfo = fabcarService.getBlcokchainInfoByNumber(Long.valueOf(num));
+        SimpleBlockInfo simpleBlockInfo = new SimpleBlockInfo(blockInfo.getBlockNumber(),blockInfo.getPreviousHash(),blockInfo.getDataHash());
+        model.addAttribute(simpleBlockInfo);
+        return simpleBlockInfo.toString();
+    }
+
+    @GetMapping("/block")
+    @ResponseBody
+    public String queryBlockByHash(@RequestParam("num")String num)  {
+        BlockInfo blockInfo = fabcarService.getBlcokchainInfoByNumber(Long.valueOf(num));
+
+        return blockInfo.getBlock().toString();
+    }
 }
