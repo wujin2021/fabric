@@ -21,11 +21,11 @@ class FabricFabcarApplicationTests {
     void aa(){
         {
             try {
-                Gateway gateway = config.gateway();
-                Network network = config.getNwork(gateway);
-                Contract contract = config.fabcar(network);
-                fabcarService = new FabcarService(gateway,contract,network);
-                System.out.println(fabcarService.getBlcokchainInfo().toString());
+//                Gateway gateway = config.gateway();
+//                Network network = config.getNwork(gateway);
+//                Contract contract = config.fabcar(network);
+//                fabcarService = new FabcarService(gateway,contract,network);
+//                System.out.println(fabcarService.getBlcokchainInfo().toString());
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
@@ -35,9 +35,9 @@ class FabricFabcarApplicationTests {
 
     @Test
     void test1(){
-        EncryptAndDecrypt encryptAndDecrypt = new EncryptAndDecrypt();
-        String planttext = encryptAndDecrypt.encrypt("123456","1");
-        String text= encryptAndDecrypt.decrypt(planttext,"2");
+//        EncryptAndDecrypt encryptAndDecrypt = new EncryptAndDecrypt();
+//        String planttext = encryptAndDecrypt.encrypt("123456","1");
+//        String text= encryptAndDecrypt.decrypt(planttext,"2");
 
 
     }

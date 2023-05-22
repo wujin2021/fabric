@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.fabricfabcar.mapper.CarDAO">
+
+    <select id="getCar" resultType="com.example.fabricfabcar.domain.Car">
+        select * from car where id = #{key};
+    </select>
+    <insert id="insert" parameterType="com.example.fabricfabcar.domain.Car">
+        insert into car (id,colour,make,owner,model) values (#{key},#{colour},#{make},#{owner},#{model});
+    </insert>
+</mapper>

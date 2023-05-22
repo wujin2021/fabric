@@ -1,13 +1,14 @@
 package com.example.fabricfabcar.controller;
 
-import com.alibaba.fastjson.JSON;
+import com.example.fabricfabcar.domain.Car;
 import com.example.fabricfabcar.domain.SimpleBlockInfo;
+import com.example.fabricfabcar.mapper.CarDAO;
 import com.example.fabricfabcar.service.FabcarService;
 import com.example.fabricfabcar.utils.HashAndStringUtil;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.hyperledger.fabric.gateway.*;
-import org.hyperledger.fabric.protos.common.Common;
+import org.hyperledger.fabric.gateway.Contract;
+import org.hyperledger.fabric.gateway.Gateway;
 import org.hyperledger.fabric.sdk.BlockInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.spi.CurrencyNameProvider;
 
 
 @Controller
@@ -27,6 +27,7 @@ public class FabcarController {
     final Gateway gateway;
     final Contract contract;
     final FabcarService fabcarService;
+    final CarDAO carDAO;
 
 
     /*根据key查询对应的car*/
@@ -120,5 +121,35 @@ public class FabcarController {
         BlockInfo blockInfo = fabcarService.getBlcokchainInfoByNumber(Long.valueOf(num));
 
         return blockInfo.getBlock().toString();
+    }
+    @GetMapping("/addCar")
+    @ResponseBody
+    public String addCar(@RequestParam("carnumber")String carnumber,@RequestParam("make")String make,
+                         @RequestParam("model")String model,@RequestParam("colour")String colour,
+                         @RequestParam("owner")String owner){
+        Car car = new Car(carnumber,make,model,colour,owner);
+        Map<String,Object> map = new ConcurrentHashMap<>();
+        try{
+        int result = carDAO.insert(car);
+        if (result > 0) {
+            map.put("result","success");
+        } else {
+            map.put("result","failure");
+        }
+        }catch (Exception e){
+            map.put("result","failure");
+        }
+
+        return map.toString();
+    }
+
+    @GetMapping("/queryCar")
+    @ResponseBody
+    public String queryCar(@RequestParam("key")String key){
+
+        Car car  = carDAO.getCar(key);
+
+       return car.toString();
+
     }
 }

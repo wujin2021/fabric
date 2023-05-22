@@ -10,6 +10,14 @@ public class Car {
    private String owner;
    private String model;
 
+    public Car(String carnumber, String make, String model, String colour, String owner) {
+        this.key = carnumber;
+        this.colour = colour;
+        this.make = make;
+        this.owner = owner;
+        this.model = model;
+    }
+
 
     @Override
     public String toString() {
