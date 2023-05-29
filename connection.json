@@ -40,12 +40,13 @@
         "ca-org2"
       ],
       "adminPrivateKeyPEM": {
-        "path": "src/main/resources/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/2f65e05834d7cb2abbffb0a2422872c2dc36c1f2c975a171945ef343dea22e11_sk"
+        "path": "/home/ubuntu/fabric/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/keystore/2f65e05834d7cb2abbffb0a2422872c2dc36c1f2c975a171945ef343dea22e11_sk"
       },
       "signedCertPEM": {
-        "path": "src/main/resources/crypto-config/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem"
+        "path": "/home/ubuntu/fabric/crypto-config/peerOrganizations/org2.example.com/users/Admin@org2.example.com/msp/signcerts/Admin@org2.example.com-cert.pem"
       }
     }
+
 
   },
   "orderers": {
@@ -57,13 +58,13 @@
         "hostnameOverride": "orderer.example.com"
       },
       "tlsCACerts": {
-        "path": "src/main/resources/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+        "path": "/home/ubuntu/fabric/crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
       },
       "adminPrivateKeyPEM": {
-        "path": "src/main/resources/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/msp/keystore/3feba0d1f274e243a11ad7ee554bc833b0c2560f8cbb6e0287a5331dcea07aba_sk"
+        "path": "/home/ubuntu/fabric/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/msp/keystore/3feba0d1f274e243a11ad7ee554bc833b0c2560f8cbb6e0287a5331dcea07aba_sk"
       },
       "signedCertPEM": {
-        "path": "src/main/resources/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/msp/signcerts/Admin@example.com-cert.pem"
+        "path": "/home/ubuntu/fabric/crypto-config/ordererOrganizations/example.com/users/Admin@example.com/msp/signcerts/Admin@example.com-cert.pem"
       }
     }
   },
@@ -76,7 +77,7 @@
         "request-timeout": 120001
       },
       "tlsCACerts": {
-        "path": "src/main/resources/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"
+        "path": "/home/ubuntu/fabric/crypto-config/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"
       }
     }
 
@@ -88,7 +89,7 @@
         "verify": true
       },
       "tlsCACerts": {
-        "path": "src/main/resources/crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem"
+        "path": "/home/ubuntu/fabric/crypto-config/peerOrganizations/org2.example.com/ca/ca.org2.example.com-cert.pem"
       },
       "registrar": [
         {

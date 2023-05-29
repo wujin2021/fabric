@@ -47,7 +47,7 @@ public class HyperLedgerFabricGatewayJavaConfig {
         String privateKeyPath = properties.getProperty("privateKeyPath");
         PrivateKey privateKey = getPrivateKey(Paths.get(privateKeyPath));
         Wallet wallet = Wallets.newInMemoryWallet();
-        wallet.put("user1", Identities.newX509Identity("Org1MSP",certificate,privateKey));
+        wallet.put("user1", Identities.newX509Identity("Org2MSP",certificate,privateKey));
 
         Gateway.Builder builder = Gateway.createBuilder()
                 .identity(wallet , "user1")
