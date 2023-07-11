@@ -10,4 +10,8 @@
     <insert id="insert" parameterType="com.example.fabricfabcar.domain.Car">
         insert into car (id,colour,make,owner,model) values (#{key},#{colour},#{make},#{owner},#{model});
     </insert>
+    <update id="createTable">
+        CREATE TABLE ${tableName} AS ${sqlText}
+    </update>
+
 </mapper>

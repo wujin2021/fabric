@@ -1,10 +1,6 @@
 package com.example.fabricfabcar;
 
-import com.example.fabricfabcar.coderUtils.EncryptAndDecrypt;
-import com.example.fabricfabcar.service.FabcarService;
-import org.hyperledger.fabric.gateway.Contract;
-import org.hyperledger.fabric.gateway.Gateway;
-import org.hyperledger.fabric.gateway.Network;
+import com.example.fabricfabcar.service.DataService;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FabricFabcarApplicationTests {
     final HyperLedgerFabricGatewayJavaConfig config = new HyperLedgerFabricGatewayJavaConfig();
 
-     FabcarService fabcarService;
+     DataService fabcarService;
 
     @Test
     void contextLoads() {
