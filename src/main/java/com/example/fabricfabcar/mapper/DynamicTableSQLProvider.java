@@ -7,12 +7,12 @@ import java.util.Map;
 public class DynamicTableSQLProvider {
     public static String insert(DynamicTableData data) {
         String tableName = data.getTableName();
-        Map<String, String> columnValues = data.getColumnValues();
+        Map<String, Object> columnValues = data.getColumnValues();
 
         StringBuilder columns = new StringBuilder();
         StringBuilder values = new StringBuilder();
 
-        for (Map.Entry<String, String> entry : columnValues.entrySet()) {
+        for (Map.Entry<String, Object> entry : columnValues.entrySet()) {
             String columnName = entry.getKey();
             Object value = entry.getValue();
 

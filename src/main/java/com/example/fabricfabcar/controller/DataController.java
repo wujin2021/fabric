@@ -19,15 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 
 @Controller
-@RequestMapping("/car")
+@RequestMapping("/data")
 @Slf4j
 @AllArgsConstructor
 public class DataController {
@@ -79,10 +76,74 @@ public class DataController {
 
     @ResponseBody
     @PostMapping("/dynamic-query")
-    public List<String> dynamicQuery(@RequestBody DynamicQueryRequest request) {
+    public List<Map<String, Object>> dynamicQuery(@RequestBody DynamicQueryRequest request) {
         String tableName = request.getTableName();
-        Map<String, String> conditions = request.getConditions();
+        Map<String, Object> conditions = request.getConditions();
+        System.out.println(conditions);
+        Iterator<Map.Entry<String, Object>> iterator = conditions.entrySet().iterator();
+        if (iterator.hasNext()) {
+            Map.Entry<String, Object> entry = iterator.next();
+            String oldKey = entry.getKey();
+            Object value = entry.getValue();
+            // 修改键
+            String newKey = tableService.getTableColumns("fabcars",tableName).get(0);
+            entry.setValue(null); // 将值设为null，即删除原有键值对
+            iterator.remove(); // 从Map中删除原有键值对
+            conditions.put(newKey, value); // 添加新的键值对
+        }
+//        for (Map.Entry<String, Object> entry : conditions.entrySet()) {
+//            String columnName = entry.getKey();
+//            Object value = entry.getValue();
+//            System.out.println(columnName);
+//            System.out.println(value);
+//            //System.out.println(conditions.columnName);
+//        }
         return dataService.dynamicQuery(tableName, conditions);
+    }
+
+    @ResponseBody
+    @GetMapping("/validateBykey")
+    public String queryCarByKey(@RequestBody DynamicQueryRequest request) throws NoSuchAlgorithmException {
+        String tableName = request.getTableName();
+        Map<String, Object> conditions = request.getConditions();
+        Iterator<Map.Entry<String, Object>> iterator = conditions.entrySet().iterator();
+        if (iterator.hasNext()) {
+            Map.Entry<String, Object> entry = iterator.next();
+            String oldKey = entry.getKey();
+            Object value = entry.getValue();
+            // 修改键
+            String newKey = tableService.getTableColumns("fabcars",tableName).get(0);
+            entry.setValue(null); // 将值设为null，即删除原有键值对
+            iterator.remove(); // 从Map中删除原有键值对
+            conditions.put(newKey, value); // 添加新的键值对
+        }
+        Collection<Object> values = conditions.values();
+        Iterator<Object> iterator1 = values.iterator();
+        Object value = null;
+        if (iterator1.hasNext()) {
+            Object value1 = iterator1.next();
+            System.out.println(value1);
+            value = value1;
+        }
+        List<Map<String, Object>> list = dataService.dynamicQuery(tableName, conditions);
+        Map<String, Object> result = new HashMap<>();
+        System.out.println("carinfo="+list);
+        result.put("carinfo", list);
+        String hash1 = dataService.queryCarByKey(value.toString());
+        System.out.println("hash1="+hash1);
+        result.put("hash1", hash1);
+        String hash2 = dataService.selectDataHashByKey(tableName, conditions);
+        result.put("hash2", hash2);
+        System.out.println("result="+result);
+        /*ObjectMapper mapper = new ObjectMapper();
+        JsonNode tree1 = mapper.readTree(hash1);
+        JsonNode tree2 = mapper.readTree(hash2);*/
+        if(hash1.equals(hash2)){
+            result.put("result1","TRUE");
+        }else {
+            result.put("result1","FALSE");
+        }
+        return result.toString();
     }
 
     /*查询所有的car*/
@@ -159,7 +220,7 @@ public class DataController {
             System.out.println(otherfield);
             fields.add(otherfield);
         }
-        Map<String, String> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<>();
         for (int i = 0; i < tableColumns.size(); i++) {
             String key = tableColumns.get(i);
             String value = fields.get(i);
@@ -171,17 +232,16 @@ public class DataController {
         System.out.println(fields);
         dataService.insertIntoDynamicTable(dynamicTableData);
         String carhash = dataService.hashData(fields);
-        Map<String, Object> result;
-        result = dataService.createCar(field1, carhash);
-        System.out.println("result="+result);
+        Map<String, Object> result1;
+        result1 = dataService.createCar(field1, carhash);
+        System.out.println("result="+result1);
         //model1.addAllAttributes(result);
         // 将获取的json数据封装一层，然后在给返回
-        JSONObject result1 = new JSONObject();
-        result.put("msg", "ok");
-        result.put("method", "json");
-        result.put("data", jsonParam);
-
-        return result1.toJSONString();
+        JSONObject result = new JSONObject();
+        result.put("code", "200");
+        result.put("msg", "数据添加成功");
+        //result.put("data", jsonParam);
+        return result.toJSONString();
     }
 
 

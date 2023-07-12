@@ -33,48 +33,73 @@ public class TableController {
         Table table = gson.fromJson(jsonString, Table.class);
         System.out.println(table);
         List attributes = new ArrayList();
-        String tablename = table.getTablename();
-        String attribute01 = table.getAttribute1();
-        String attribute02 = table.getAttribute2();
-        String attribute03 = table.getAttribute3();
-        String attribute04 = table.getAttribute4();
-        String attribute05 = table.getAttribute5();
-        ColumnMetadata columnMetadata1 = new ColumnMetadata();
-        columnMetadata1.setColumnName(attribute01);
-        columnMetadata1.setColumnType("varchar(255)");
-        ColumnMetadata columnMetadata2 = new ColumnMetadata();
-        columnMetadata2.setColumnName(attribute02);
-        columnMetadata2.setColumnType("varchar(255)");
-        ColumnMetadata columnMetadata3 = new ColumnMetadata();
-        columnMetadata3.setColumnName(attribute03);
-        columnMetadata3.setColumnType("varchar(255)");
-        ColumnMetadata columnMetadata4 = new ColumnMetadata();
-        columnMetadata4.setColumnName(attribute04);
-        columnMetadata4.setColumnType("varchar(255)");
-        ColumnMetadata columnMetadata5 = new ColumnMetadata();
-        columnMetadata5.setColumnName(attribute05);
-        columnMetadata5.setColumnType("varchar(255)");
-        attributes.add(columnMetadata1);
-        attributes.add(columnMetadata2);
-        attributes.add(columnMetadata3);
-        attributes.add(columnMetadata4);
-        attributes.add(columnMetadata5);
-
-        ElseAttribute[] elseAttribute = table.getElseAttribute();
-        for (int i = 0; i < elseAttribute.length; i++) {
-            String other = elseAttribute[i].getValue();
-            System.out.println(other);
-            ColumnMetadata columnMetadata = new ColumnMetadata();
-            columnMetadata.setColumnName(other);
-            columnMetadata.setColumnType("varchar(255)");
-            attributes.add(columnMetadata);
+        String formName = table.getFormName();
+        System.out.println(formName);
+        //String formName1 = "{\"name\":"+formName+"}";
+        List<TableName> tableNames = tableService.getAllTableNames("fabcars");
+        //System.out.println(formName1);
+        //System.out.println(tableNames);
+        boolean isExit = false;
+        for (int i = 0; i < tableNames.size(); i++) {
+            if(tableNames.get(i).getName().equals(formName)){
+                isExit = true;
+                break;
+            }
         }
-        System.out.println(attributes);
-        TableMetadata tableMetadata = new TableMetadata();
-        tableMetadata.setTableName(tablename);
-        tableMetadata.setColumns(attributes);
-        tableService.createTable(tableMetadata);
-        return "OK";
+        if(!isExit){
+            String attribute01 = table.getField1();
+            String attribute02 = table.getField2();
+            String attribute03 = table.getField3();
+            String attribute04 = table.getField4();
+            String attribute05 = table.getField5();
+            ColumnMetadata columnMetadata1 = new ColumnMetadata();
+            columnMetadata1.setColumnName(attribute01);
+            columnMetadata1.setColumnType("varchar(255)");
+            ColumnMetadata columnMetadata2 = new ColumnMetadata();
+            columnMetadata2.setColumnName(attribute02);
+            columnMetadata2.setColumnType("varchar(255)");
+            ColumnMetadata columnMetadata3 = new ColumnMetadata();
+            columnMetadata3.setColumnName(attribute03);
+            columnMetadata3.setColumnType("varchar(255)");
+            ColumnMetadata columnMetadata4 = new ColumnMetadata();
+            columnMetadata4.setColumnName(attribute04);
+            columnMetadata4.setColumnType("varchar(255)");
+            ColumnMetadata columnMetadata5 = new ColumnMetadata();
+            columnMetadata5.setColumnName(attribute05);
+            columnMetadata5.setColumnType("varchar(255)");
+            attributes.add(columnMetadata1);
+            attributes.add(columnMetadata2);
+            attributes.add(columnMetadata3);
+            attributes.add(columnMetadata4);
+            attributes.add(columnMetadata5);
+
+            ElseAttribute[] elseAttribute = table.getElseData();
+            for (int i = 0; i < elseAttribute.length; i++) {
+                String other = elseAttribute[i].getValue();
+                System.out.println(other);
+                ColumnMetadata columnMetadata = new ColumnMetadata();
+                columnMetadata.setColumnName(other);
+                columnMetadata.setColumnType("varchar(255)");
+                attributes.add(columnMetadata);
+            }
+            System.out.println(attributes);
+            TableMetadata tableMetadata = new TableMetadata();
+            tableMetadata.setTableName(formName);
+            tableMetadata.setColumns(attributes);
+            tableService.createTable(tableMetadata);
+            JSONObject result = new JSONObject();
+            result.put("code", "200");
+            result.put("msg", "表格创建成功");
+            //result.put("data", jsonParam);
+            return result.toJSONString();
+        }else{
+            JSONObject result = new JSONObject();
+            result.put("code", "400");
+            result.put("msg", "表格"+formName+"已存在，创建失败！");
+            //result.put("data", jsonParam);
+            return result.toJSONString();
+        }
+
     }
 
     @ResponseBody

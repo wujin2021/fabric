@@ -7,7 +7,7 @@ import java.util.Map;
 @Data
 public class DynamicTableData {
     private String tableName;
-    private Map<String, String> columnValues;
+    private Map<String, Object> columnValues;
 
     // 构造函数、getter和setter方法
     // ...

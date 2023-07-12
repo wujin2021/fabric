@@ -25,5 +25,5 @@ public interface DataMapper {
     void insertIntoDynamicTable(DynamicTableData data);
 
     @SelectProvider(type = DynamicQuerySQLProvider.class, method = "dynamicQuery")
-    List<String> dynamicQueryData(@Param("tableName") String tableName, @Param("conditions") Map<String, String> conditions);
+    List<Map<String, Object>> dynamicQueryData(@Param("tableName") String tableName, @Param("conditions") Map<String, Object> conditions);
 }

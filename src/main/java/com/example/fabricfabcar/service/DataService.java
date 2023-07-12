@@ -8,6 +8,7 @@ import com.example.fabricfabcar.domain.SimpleBlockInfo;
 import com.example.fabricfabcar.mapper.DataMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import org.apache.commons.codec.binary.StringUtils;
@@ -99,22 +100,22 @@ public class DataService {
 //        System.out.println(cars);
 //        return cars;
 //    }
-    public String selectDataHashByKey(String key) throws NoSuchAlgorithmException {
-        String result = null;
-        List list = dataMapper.selectBykey(key);
-        System.out.println(list);
-        // 创建一个Gson实例
-        //Gson gson = new Gson();
-        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
-        // 将List对象转换为JSON字符串
-        String json = gson.toJson(list);
-        // 打印JSON字符串
-        System.out.println(json);
-        result = sha256(json);
-        //result = "{\"carhash\":\""+hash +"\"}";
-        System.out.println("hash2="+result);
-        return result;
-}
+//    public String selectDataHashByKey(String key) throws NoSuchAlgorithmException {
+//        String result = null;
+//        List list = dataMapper.selectBykey(key);
+//        System.out.println(list);
+//        // 创建一个Gson实例
+//        //Gson gson = new Gson();
+//        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+//        // 将List对象转换为JSON字符串
+//        String json = gson.toJson(list);
+//        // 打印JSON字符串
+//        System.out.println(json);
+//        result = sha256(json);
+//        //result = "{\"carhash\":\""+hash +"\"}";
+//        System.out.println("hash2="+result);
+//        return result;
+//    }
     public List<Car> selectDatainfoByKey(String key){
         List<Car> cars = dataMapper.selectBykey(key);
         System.out.println(cars);
@@ -131,8 +132,18 @@ public class DataService {
         return cars;
     }
 
-    public List<String> dynamicQuery(String tableName, Map<String, String> conditions) {
+    public List<Map<String, Object>> dynamicQuery(String tableName, Map<String, Object> conditions) {
         return dataMapper.dynamicQueryData(tableName, conditions);
+    }
+
+    public String selectDataHashByKey(String tableName, Map<String, Object> conditions) throws NoSuchAlgorithmException {
+        String result = null;
+        List<Map<String, Object>> list = dataMapper.dynamicQueryData(tableName, conditions);
+        System.out.println(list);
+        result = sha256(jsontoList(list.toString()).toString());
+        //result = "{\"carhash\":\""+hash +"\"}";
+        System.out.println("hash2="+result);
+        return result;
     }
 
     public Map<String, Object> queryAllCars() {
@@ -266,6 +277,29 @@ public class DataService {
         String hash = sha256(list.toString());
         System.out.println(hash);
         return hash;
+    }
+
+    public List<String> jsontoList(String jsonlist){
+        ///String jsonlist = "[{\"a\":\"a1\",\"b\":\"b1\",\"c\":\"c1\",\"d\":\"d1\",\"e\":\"e1\",\"f\":\"f1\",\"g\":\"g1\",\"h\":\"h1\"}]";
+
+        Gson gson = new Gson();
+        JsonElement jsonElement = gson.fromJson(jsonlist, JsonElement.class);
+
+        List<String> values = new ArrayList<>();
+        if (jsonElement.isJsonArray()) {
+            for (JsonElement element : jsonElement.getAsJsonArray()) {
+                if (element.isJsonObject()) {
+                    JsonObject jsonObject = element.getAsJsonObject();
+                    Set<Map.Entry<String, JsonElement>> entrySet = jsonObject.entrySet();
+                    for (Map.Entry<String, JsonElement> entry : entrySet) {
+                        values.add(entry.getValue().getAsString());
+                    }
+                }
+            }
+        }
+
+        System.out.println(values);
+        return values;
     }
 
     public String sha256(String input) throws NoSuchAlgorithmException {

@@ -11,14 +11,21 @@ public class TableSqlProvider {
         List<ColumnMetadata> columns = (List<ColumnMetadata>) params.get("columns");
 
         StringBuilder sqlBuilder = new StringBuilder();
-        sqlBuilder.append("CREATE TABLE ").append(tableName).append(" (");
+        sqlBuilder.append("CREATE TABLE IF NOT EXISTS ").append(tableName).append(" (");
 
         for (ColumnMetadata column : columns) {
             sqlBuilder.append(column.getColumnName()).append(" ").append(column.getColumnType()).append(", ");
         }
 
-        sqlBuilder.setLength(sqlBuilder.length() - 2); // 去除最后的逗号和空格
+        ColumnMetadata columnMetadata = columns.get(0);
+        //System.out.println(columnMetadata);
+        //System.out.println(columnMetadata.getColumnName());
+        sqlBuilder.append("PRIMARY KEY(").append(columnMetadata.getColumnName()).append(")");
+
+        //sqlBuilder.setLength(sqlBuilder.length() - 2); // 去除最后的逗号和空格
         sqlBuilder.append(")");
+
+        System.out.println(sqlBuilder.toString());
 
         return sqlBuilder.toString();
     }
